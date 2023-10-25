@@ -24,6 +24,7 @@ import {
   TableCell,
   RadioGroup,
   Radio,
+  Image,
 } from "@nextui-org/react";
 
 export default function App() {
@@ -84,56 +85,62 @@ export default function App() {
                   Active Prompt
                 </div>
               </div>
-              <Select
-                className="max-w-xs mt-4 w-[342px] h-[43.33px] justify-center items-center inline-flex "
-                label="Prompt Dropdown..."
-              >
-                <SelectItem key="Strict">Strict</SelectItem>
-              </Select>
-              <div>
-                <Button color="secondary" onPress={onOpen}>
-                  Add new
-                </Button>
-                <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-                  <ModalContent>
-                    {(onClose) => (
-                      <>
-                        <ModalHeader className="flex flex-col gap-1">
-                          Add Prompt
-                          <div className="text-neutral-500 text-xs font-normal">
-                            Add your custom prompt and save it to DocsGPT.
-                          </div>
-                        </ModalHeader>
-                        <ModalBody>
-                          <Textarea
-                            label="Prompt Name"
-                            labelPlacement="outside"
-                            placeholder="Enter your Prompt Name"
-                            className="max-w-xs"
-                          />
-                          <Textarea
-                            label="Prompt Text"
-                            labelPlacement="outside"
-                            // placeholder="Enter your Prompt Name"
-                            className="max-w-xs"
-                          />
-                        </ModalBody>
-                        <ModalFooter>
-                          <Button
-                            color="danger"
-                            variant="light"
-                            onPress={onClose}
-                          >
-                            Close
-                          </Button>
-                          <Button color="primary" onPress={onClose}>
-                            Save
-                          </Button>
-                        </ModalFooter>
-                      </>
-                    )}
-                  </ModalContent>
-                </Modal>
+              <div className="flex gap-6 align-center justify-center">
+                <Select
+                  className="max-w-xs mt-4 w-[342px] h-[43.33px] justify-center items-center inline-flex "
+                  label="Prompt Dropdown..."
+                >
+                  <SelectItem key="Strict">Strict</SelectItem>
+                </Select>
+                <div>
+                  <Button
+                    className="w-[101px] h-[42px] px-7 py-1.5 rounded-[62px] border border-violet-600 flex mt-4"
+                    color="secondary"
+                    onPress={onOpen}
+                  >
+                    Add new
+                  </Button>
+                  <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                    <ModalContent>
+                      {(onClose) => (
+                        <>
+                          <ModalHeader className="flex flex-col gap-1">
+                            Add Prompt
+                            <div className="text-neutral-500 text-xs font-normal">
+                              Add your custom prompt and save it to DocsGPT.
+                            </div>
+                          </ModalHeader>
+                          <ModalBody>
+                            <Textarea
+                              label="Prompt Name"
+                              labelPlacement="outside"
+                              placeholder="Enter your Prompt Name"
+                              className="max-w-xs"
+                            />
+                            <Textarea
+                              label="Prompt Text"
+                              labelPlacement="outside"
+                              // placeholder="Enter your Prompt Name"
+                              className="max-w-xs"
+                            />
+                          </ModalBody>
+                          <ModalFooter>
+                            <Button
+                              color="danger"
+                              variant="light"
+                              onPress={onClose}
+                            >
+                              Close
+                            </Button>
+                            <Button color="secondary" onPress={onClose}>
+                              Save
+                            </Button>
+                          </ModalFooter>
+                        </>
+                      )}
+                    </ModalContent>
+                  </Modal>
+                </div>
               </div>
             </Tab>
             <Tab key="documents" title="Documents">
@@ -163,8 +170,12 @@ export default function App() {
                   </TableBody>
                 </Table>
               </div>
-              <div className="mt-4">
-                <Button color="secondary" onPress={onOpen}>
+              <div>
+                <Button
+                  className="mt-4 left-[270px]"
+                  color="secondary"
+                  onPress={onOpen}
+                >
                   Add new
                 </Button>
                 <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
@@ -172,22 +183,23 @@ export default function App() {
                     {(onClose) => (
                       <>
                         <ModalHeader className="flex flex-col gap-1">
-                          Add Prompt
-                          <div className="text-neutral-500 text-xs font-normal">
-                            Add your custom prompt and save it to DocsGPT.
+                          Upload New Documentation
+                          <div className="text-neutral-500 text-xs font-normal ">
+                            Please upload .pdf, .txt, .rst, .docx, .md, .zip
+                            limited to 25mb
                           </div>
                         </ModalHeader>
                         <ModalBody>
                           <Textarea
-                            label="Prompt Name"
+                            label="Name"
                             labelPlacement="outside"
-                            placeholder="Enter your Prompt Name"
+                            placeholder="Enter Name"
                             className="max-w-xs"
                           />
                           <Textarea
-                            label="Prompt Text"
+                            // label="URL"
                             labelPlacement="outside"
-                            // placeholder="Enter your Prompt Name"
+                            placeholder="URL (Optional)"
                             className="max-w-xs"
                           />
                         </ModalBody>
@@ -197,10 +209,10 @@ export default function App() {
                             variant="light"
                             onPress={onClose}
                           >
-                            Close
+                            Back
                           </Button>
-                          <Button color="primary" onPress={onClose}>
-                            Save
+                          <Button color="secondary" onPress={onClose}>
+                            Train
                           </Button>
                         </ModalFooter>
                       </>
@@ -209,7 +221,53 @@ export default function App() {
                 </Modal>
               </div>
             </Tab>
-            <Tab key="widgets" title="Widgets"></Tab>
+            <Tab key="widgets" title="Widgets">
+              <div className="text-neutral-800 text-lg font-semibold font-['Inter'] leading-none mt-6">
+                Widget source
+              </div>
+              <Select
+                className="max-w-xs mt-5 w-[342px] h-[43.33px] justify-center items-center inline-flex "
+                label="Select widget source"
+              >
+                {/* <SelectItem key="Strict">Strict</SelectItem> */}
+              </Select>
+              <div className="text-neutral-800 text-lg font-semibold font-['Inter'] leading-none mt-[24px]">
+                Widget method
+              </div>
+              <Select
+                className="max-w-xs mt-5 w-[342px] h-[43.33px] justify-center items-center inline-flex "
+                label="Select widget method"
+              >
+                {/* <SelectItem key="Strict">Strict</SelectItem> */}
+              </Select>
+              <div className="text-neutral-800 text-lg font-semibold font-['Inter'] leading-none mt-[24px]">
+                Widget type
+              </div>
+              <Select
+                className="max-w-xs mt-5 w-[342px] h-[43.33px] justify-center items-center inline-flex "
+                label="Select widget type"
+              >
+                {/* <SelectItem key="Strict">Strict</SelectItem> */}
+              </Select>
+              <Textarea
+                label="Widget Code Snippet"
+                labelPlacement="outside"
+                placeholder="Widget code... along with some snippets"
+                className="max-w-xs mt-7"
+              />
+              <div className="flex flex-col gap-[16px]">
+                <div className="text-neutral-800 text-lg font-semibold font-['Inter'] leading-none mt-7">
+                  Widget screenshot
+                </div>
+                <Image
+                  isBlurred
+                  width={240}
+                  src="https://nextui-docs-v2.vercel.app/images/album-cover.png"
+                  alt="NextUI Album Cover"
+                  classNames="m-5"
+                />
+              </div>
+            </Tab>
           </Tabs>
         ))}
       </div>
