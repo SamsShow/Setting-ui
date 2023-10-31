@@ -30,6 +30,7 @@ import {
 export default function App() {
   const radiusList = ["full"];
   const [selectedKeys, setSelectedKeys] = React.useState(new Set(["text"]));
+  
 
   const selectedValue = React.useMemo(
     () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
@@ -48,7 +49,7 @@ export default function App() {
       </div>
       <div className="flex flex-wrap gap-4">
         {radiusList.map((radius) => (
-          <Tabs key={radius} radius={radius} aria-label="Tabs radius">
+          <Tabs key={radius} radius="full" color="secondary" aria-label="Tabs radius">
             <Tab key="general" title="General">
               <div className="text-black text-lg mt-6 font-semibold font-['Inter'] leading-none">
                 Select theme
